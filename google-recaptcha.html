@@ -1,3 +1,8 @@
+<!--
+ Copyright 2015 The Polymer Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style
+ license that can be found in the LICENSE file.
+-->
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
@@ -13,7 +18,7 @@ See https://developers.google.com/recaptcha
 @element google-recaptcha
 @blurb Element for Google reCAPTCHA
 @status alpha
-@homepage https://github.com/cbalit/re-captcha
+@homepage https://github.com/googlewebcomponents/re-captcha
 @demo demo/index.html
 -->
 <dom-module id="google-recaptcha">
@@ -145,16 +150,16 @@ See https://developers.google.com/recaptcha
       },
       _renderWhenApiReady: function () {
         if(!window.grecaptcha){
-          //Check if we can try again according to timeout
+          // Check if we can try again according to timeout
           if(this._delay < this.timeout){
             setTimeout(function() {
               this._renderWhenApiReady()
             }.bind(this), this._RETRY_DELAY);
-            //increment delay to check timeout
+            // increment delay to check timeout
             this._delay+=this._RETRY_DELAY;
           }
           else{
-            //We reach the timeout value
+            // We reach the timeout value
           }
         }
         else{
