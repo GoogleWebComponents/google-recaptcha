@@ -1,6 +1,7 @@
-describe('google-recaptcha BASIC JS', function () {
-  var myEl;
+'use strict';
 
+describe('google-recaptcha BASIC JS', function () {
+  var myEl = null;
 
   beforeEach(function () {
     myEl = Utils.createReCaptcha();
