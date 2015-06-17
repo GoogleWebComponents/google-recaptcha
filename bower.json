@@ -1,6 +1,6 @@
 {
   "name": "google-recaptcha",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "keywords": [
     "recaptcha",
     "polymer",
@@ -16,16 +16,14 @@
   },
   "homepage": "https://github.com/GoogleWebComponents/google-recaptcha",
   "authors": [
-    "Cyril Balit <cbalit@gmail.com>"
+    "Cyril Balit <cbalit@gmail.com>",
+    "The Polymer Authors"
   ],
   "description": "A Polymer reCaptcha component",
-  "license": "MIT",
+  "license": "Apache-2",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "../",
-    "test",
-    "tests"
-  ]
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
 }
