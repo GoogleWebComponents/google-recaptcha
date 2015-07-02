@@ -199,8 +199,7 @@ See https://developers.google.com/recaptcha
        * @return {String} Returns the response.
        */
       getResponse:function(){
-        var resp=window.grecaptcha.getResponse(this._captchaId);
-        return resp;
+        return window.grecaptcha.getResponse(this._captchaId);
       },
       /**
        * The `captcha-response` event is fired whenever we
