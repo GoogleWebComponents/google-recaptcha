@@ -1,25 +1,25 @@
 {
   "name": "google-recaptcha",
   "version": "1.0.0",
+  "description": "A Polymer reCaptcha component",
   "keywords": [
     "recaptcha",
     "polymer",
     "web-components"
+  ],
+  "authors": [
+    "Cyril Balit <cbalit@gmail.com>",
+    "The Polymer Authors"
   ],
   "main": "google-recaptcha.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^3.1.0",
+    "web-component-tester": "*",
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
   },
   "homepage": "https://github.com/GoogleWebComponents/google-recaptcha",
-  "authors": [
-    "Cyril Balit <cbalit@gmail.com>",
-    "The Polymer Authors"
-  ],
-  "description": "A Polymer reCaptcha component",
   "license": "Apache-2",
   "ignore": [
     "/.*",
