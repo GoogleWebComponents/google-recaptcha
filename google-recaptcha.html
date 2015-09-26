@@ -140,7 +140,6 @@ See https://developers.google.com/recaptcha
       attached: function () {
         if(this.sitekey===''){
           throw new Error("sitekey attribute is mandatory for re-captcha element");
-          return;
         }
         if(!SCRIPT_LOADED){
           this._generateScriptApiTag();
