@@ -18,6 +18,7 @@
   </style>
   <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="../google-recaptcha.html">
+  <link rel="import" href="../iron-form/iron-form.html">
   <script type="text/javascript">
     window.addEventListener('WebComponentsReady', function(e) {
       var rec = document.querySelector('google-recaptcha');
@@ -40,11 +41,27 @@
 <body>
   <p>Default re-captcha</p>
   <google-recaptcha sitekey="6LdRcP4SAAAAAJ4Dq1gXcD9AyhzuG77iz7E2Dmu4"></google-recaptcha>
-  <p>Dark re-captcha</p>
-  <google-recaptcha theme="dark" sitekey="6LdRcP4SAAAAAJ4Dq1gXcD9AyhzuG77iz7E2Dmu4"></google-recaptcha>
-  <p>Audio re-captcha</p>
-  <google-recaptcha type="audio" sitekey="6LdRcP4SAAAAAJ4Dq1gXcD9AyhzuG77iz7E2Dmu4"></google-recaptcha>
+
   <p>Event message (working with the first captcha)</p>
   <p id="eventMessage"></p>
+
+  <hr>
+
+  <p>Dark re-captcha</p>
+  <google-recaptcha theme="dark" sitekey="6LdRcP4SAAAAAJ4Dq1gXcD9AyhzuG77iz7E2Dmu4"></google-recaptcha>
+
+  <hr>
+
+  <p>Audio re-captcha</p>
+  <google-recaptcha type="audio" sitekey="6LdRcP4SAAAAAJ4Dq1gXcD9AyhzuG77iz7E2Dmu4"></google-recaptcha>
+
+  <hr>
+
+  <form is="iron-form" style="outline: thin solid #ccc; padding: .5rem 2rem;">
+    <h2>Demo within an iron-form</h2>
+    <google-recaptcha required sitekey="6LdRcP4SAAAAAJ4Dq1gXcD9AyhzuG77iz7E2Dmu4"></google-recaptcha>
+    <button type="submit" >Submit</button>
+  </form>
+
 </body>
 </html>

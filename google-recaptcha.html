@@ -4,6 +4,8 @@
  license that can be found in the LICENSE file.
 -->
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
 
 <!--
 Polymer element for Google reCAPTCHA
@@ -26,6 +28,9 @@ See https://developers.google.com/recaptcha
     :host {
       display: block;
     }
+    :host.invalid {
+      outline: 1px solid red;
+    }
   </style>
   <template><content></content></template>
 </dom-module>
@@ -42,6 +47,18 @@ See https://developers.google.com/recaptcha
       _delay:0,
       _containerId:'',
       _captchaId:'',
+
+      _invalid: true,
+
+      behaviors: [
+        Polymer.IronFormElementBehavior,
+        Polymer.IronValidatableBehavior
+      ],
+
+      _getValidity: function () {
+        this.toggleClass('invalid', this._invalid);
+        return !this._invalid;
+      },
 
       properties: {
         /**
@@ -95,10 +112,10 @@ See https://developers.google.com/recaptcha
       },
 
       observers: [
-        '_validate(theme, type, timeout)'
+        '_validateAttrs(theme, type, timeout)'
       ],
 
-      _validate:function () {
+      _validateAttrs: function () {
         if(this.theme!='dark' && this.theme!='light'){
           this.theme='light';
         }
@@ -217,6 +234,8 @@ See https://developers.google.com/recaptcha
        *  @param {String} response response to store
        */
       _responseHandler: function (response) {
+        this._invalid = false;
+        this.toggleClass('invalid', this._invalid);
         this.response=response;
         this.fire('captcha-response',{response:response});
       },
@@ -232,6 +251,8 @@ See https://developers.google.com/recaptcha
        * The `expiredHandler` method fires the captcha-expired event.
        */
       _expiredHandler: function () {
+        this._invalid = true;
+        this.toggleClass('invalid', this._invalid);
         this.fire('captcha-expired');
       }
     });
