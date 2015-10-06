@@ -113,10 +113,10 @@ See https://developers.google.com/recaptcha
       },
 
       observers: [
-        '_validateAttrs(theme, type, timeout)'
+        '_checkOptions(theme, type, timeout)'
       ],
 
-      _validateAttrs: function () {
+      _checkOptions: function () {
         if(this.theme!='dark' && this.theme!='light'){
           this.theme='light';
         }
