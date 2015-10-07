@@ -24,16 +24,18 @@ See https://developers.google.com/recaptcha
 @demo demo/index.html
 -->
 <dom-module id="google-recaptcha">
-  <style>
-    :host {
-      display: block;
-    }
-    :host.invalid {
-      border: 1px solid red;
-      border-radius: 3px;
-    }
-  </style>
-  <template><content></content></template>
+  <template class="foo">
+    <style>
+      :host {
+        display: inline-block;
+        padding: 2px 0 0 2px;
+      }
+      :host[invalid]:not([pristine]) {
+        border: 1px solid red;
+        border-radius: 3px;
+      }
+    </style>
+  </template>
 </dom-module>
 
 <script>
@@ -49,19 +51,38 @@ See https://developers.google.com/recaptcha
       _containerId:'',
       _captchaId:'',
 
-      _invalid: true,
-
       behaviors: [
         Polymer.IronFormElementBehavior,
         Polymer.IronValidatableBehavior
       ],
 
       _getValidity: function () {
-        this.toggleClass('invalid', this._invalid);
-        return !this._invalid;
+        this.pristine = false;
+        return !this.invalid;
       },
 
       properties: {
+        /**
+         * Whether a captcha in an iron-form is a required input.
+         */
+        required: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
+        invalid: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
+        pristine: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
         /**
          * The total time (in milliseconds) to wait for API loading
          */
@@ -153,7 +174,6 @@ See https://developers.google.com/recaptcha
         return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
       },
       ready: function () {
-
       },
       attached: function () {
         if(this.sitekey===''){
@@ -235,8 +255,7 @@ See https://developers.google.com/recaptcha
        *  @param {String} response response to store
        */
       _responseHandler: function (response) {
-        this._invalid = false;
-        this.toggleClass('invalid', this._invalid);
+        this.invalid = false;
         this.response=response;
         this.fire('captcha-response',{response:response});
       },
@@ -252,8 +271,7 @@ See https://developers.google.com/recaptcha
        * The `expiredHandler` method fires the captcha-expired event.
        */
       _expiredHandler: function () {
-        this._invalid = true;
-        this.toggleClass('invalid', this._invalid);
+        this.invalid = true;
         this.fire('captcha-expired');
       }
     });
