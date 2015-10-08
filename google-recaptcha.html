@@ -255,6 +255,7 @@ See https://developers.google.com/recaptcha
        *  @param {String} response response to store
        */
       _responseHandler: function (response) {
+        this.pristine = false;
         this.invalid = false;
         this.response=response;
         this.fire('captcha-response',{response:response});
@@ -271,6 +272,7 @@ See https://developers.google.com/recaptcha
        * The `expiredHandler` method fires the captcha-expired event.
        */
       _expiredHandler: function () {
+        this.pristine = false;
         this.invalid = true;
         this.fire('captcha-expired');
       }
