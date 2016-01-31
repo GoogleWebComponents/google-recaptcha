@@ -1,4 +1,7 @@
 google-recaptcha element
 ========================
 
-## See the [component page](http://GoogleWebComponents.github.io/google-recaptcha) for more information.
+Warning: Status Uncertain
+-------------------------
+
+Please see https://github.com/GoogleWebComponents/google-recaptcha/issues/10
