@@ -1,7 +1,4 @@
 google-recaptcha element
 ========================
 
-Warning: Status Uncertain
--------------------------
-
-Please see https://github.com/GoogleWebComponents/google-recaptcha/issues/10
+# This element is no longer maintained. Please use [cbalit/re-captcha](https://github.com/cbalit/re-captcha) instead.
