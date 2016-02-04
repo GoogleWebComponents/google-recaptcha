@@ -4,6 +4,8 @@
  license that can be found in the LICENSE file.
 -->
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
 
 <!--
 Polymer element for Google reCAPTCHA
@@ -22,12 +24,18 @@ See https://developers.google.com/recaptcha
 @demo demo/index.html
 -->
 <dom-module id="google-recaptcha">
-  <style>
-    :host {
-      display: block;
-    }
-  </style>
-  <template><content></content></template>
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        padding: 2px 0 0 2px;
+      }
+      :host[invalid]:not([pristine]) {
+        border: 1px solid red;
+        border-radius: 3px;
+      }
+    </style>
+  </template>
 </dom-module>
 
 <script>
@@ -43,7 +51,38 @@ See https://developers.google.com/recaptcha
       _containerId:'',
       _captchaId:'',
 
+      behaviors: [
+        Polymer.IronFormElementBehavior,
+        Polymer.IronValidatableBehavior
+      ],
+
+      _getValidity: function () {
+        this.pristine = false;
+        return !this.invalid;
+      },
+
       properties: {
+        /**
+         * Whether a captcha in an iron-form is a required input.
+         */
+        required: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
+        invalid: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
+        pristine: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
         /**
          * The total time (in milliseconds) to wait for API loading
          */
@@ -95,10 +134,10 @@ See https://developers.google.com/recaptcha
       },
 
       observers: [
-        '_validate(theme, type, timeout)'
+        '_checkOptions(theme, type, timeout)'
       ],
 
-      _validate:function () {
+      _checkOptions: function () {
         if(this.theme!='dark' && this.theme!='light'){
           this.theme='light';
         }
@@ -135,7 +174,6 @@ See https://developers.google.com/recaptcha
         return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
       },
       ready: function () {
-
       },
       attached: function () {
         if(this.sitekey===''){
@@ -217,6 +255,8 @@ See https://developers.google.com/recaptcha
        *  @param {String} response response to store
        */
       _responseHandler: function (response) {
+        this.pristine = false;
+        this.invalid = false;
         this.response=response;
         this.fire('captcha-response',{response:response});
       },
@@ -232,6 +272,8 @@ See https://developers.google.com/recaptcha
        * The `expiredHandler` method fires the captcha-expired event.
        */
       _expiredHandler: function () {
+        this.pristine = false;
+        this.invalid = true;
         this.fire('captcha-expired');
       }
     });
